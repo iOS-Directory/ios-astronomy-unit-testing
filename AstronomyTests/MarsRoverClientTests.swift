@@ -62,6 +62,23 @@ class MarsRoverClientTests: XCTestCase {
         XCTAssertNil(marsRoverClient.searchResults)
     }
     
+    func testMarsRoverBadDataError() {
+        
+        let mockLoader = MockLoader(data: inValidRoverJSON, error: nil)
+        
+        let marsRoverClient = MarsRoverClient(networkLoader: mockLoader)
+        
+        let expectation = self.expectation(description: "")
+        
+        marsRoverClient.fetchMarsRover(named: "pathfinder") { (data, error) in
+            
+            XCTAssertNotNil(error)
+            expectation.fulfill()
+            
+        }
+        wait(for: [expectation], timeout: 5)
+    }
+    
     
     
 
