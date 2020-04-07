@@ -10,6 +10,8 @@ import Foundation
 
 class MarsRoverClient {
     
+    var searchResults: MarsRover?
+    
     let networkLoader: NetworkDataLoader
     
     init(networkLoader: NetworkDataLoader = URLSession.shared) {
@@ -28,6 +30,7 @@ class MarsRoverClient {
                 completion(nil, error)
                 return
             }
+            self.searchResults = rover
             completion(rover, nil)
         }
     }
